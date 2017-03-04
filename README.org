@@ -1,0 +1,27 @@
+* Opiskelijamajoitus.net
+  description of the service here
+* Development
+** External dependencies
+   postgresql, postgresql development
+
+** Configuring postgresql
+   Create new user =omanet_dev=
+
+   #+BEGIN_SRC sh
+   createuser --interactive
+   createdb -O omanet_dev omanet_dev
+   #+END_SRC
+
+   with psql
+   #+BEGIN_SRC sql
+   alter user omanet_dev with password 'omanet';
+   #+END_SRC
+
+
+** Starting the development server
+  #+BEGIN_SRC
+  Install the yesod command line tool: stack build yesod-bin cabal-install --install-ghc
+  Build libraries: stack build
+  Launch devel server: stack exec -- yesod devel
+  View your development site at http://localhost:3000/
+  #+END_SRC

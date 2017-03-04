@@ -1,4 +1,5 @@
 static/tmp/
+yesod-devel/*
 config/client_session_key.aes
 
 dist
