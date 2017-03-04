@@ -10,6 +10,7 @@
    #+BEGIN_SRC sh
    createuser --interactive
    createdb -O omanet_dev omanet_dev
+   createdb -O omanet_dev omanet_test
    #+END_SRC
 
    with psql
@@ -17,11 +18,17 @@
    alter user omanet_dev with password 'omanet';
    #+END_SRC
 
+** Run tests
+   #+BEGIN_SRC sh
+   stack test
+   #+END_SRC
 
 ** Starting the development server
-  #+BEGIN_SRC
-  Install the yesod command line tool: stack build yesod-bin cabal-install --install-ghc
-  Build libraries: stack build
-  Launch devel server: stack exec -- yesod devel
-  View your development site at http://localhost:3000/
+  #+BEGIN_SRC sh
+  stack build yesod-bin cabal-install --install-ghc # Install the yesod command line tool
+  stack build                                       # Build libraries
+  stack exec -- yesod devel                         # Launch devel server
   #+END_SRC
+
+  View your development site at http://localhost:3000/
+
