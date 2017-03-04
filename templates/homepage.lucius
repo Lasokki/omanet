@@ -2,6 +2,23 @@ h2##{aDomId} {
     color: #990
 }
 
+.jutut {
+  background-color: red;
+}
+
+.laatikko {
+  background-color: pink;
+  border-style: solid;
+}
+
+.lopinat {
+  background-color: yellow;
+}
+
+.laatikot {
+  background-color: blue;
+}
+
 li {
     line-height: 2em;
     font-size: 16px
