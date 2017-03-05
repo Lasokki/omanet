@@ -68,13 +68,13 @@ authenticateAs :: Entity User -> YesodExample App ()
 authenticateAs (Entity _ u) = do
     request $ do
         setMethod "POST"
-        addPostParam "ident" $ userIdent u
+        addPostParam "ident" $ userName u
         setUrl $ AuthR $ PluginR "dummy" []
 
 -- | Create a user.
 createUser :: Text -> YesodExample App (Entity User)
 createUser ident = do
     runDB $ insertEntity User
-        { userIdent = ident
-        , userPassword = Nothing
+        { userName = ident
+        , userEmail = ident
         }

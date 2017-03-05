@@ -23,4 +23,4 @@ spec = withApp $ do
 
             get ProfileR
             let (Entity _ user) = userEntity
-            htmlAnyContain ".username" . unpack $ userIdent user
+            htmlAnyContain ".username" . unpack $ userName user
