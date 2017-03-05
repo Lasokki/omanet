@@ -17,7 +17,9 @@ postUserR :: Handler Html
 postUserR = do
     ((result, widget), enctype) <- runFormPost userForm
     case result of
-        FormSuccess user -> defaultLayout [whamlet|<p>Syöttö onnistui!<p>#{show user}|]
+        FormSuccess user -> do
+            _ <- runDB $ insert user
+            defaultLayout [whamlet|<p>Syöttö onnistui!<p>#{show user}|]
         _ -> defaultLayout
             [whamlet|
                 <p>Invalid input, let's try again.
