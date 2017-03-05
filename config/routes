@@ -8,5 +8,5 @@
 
 /profile ProfileR GET
 
-/user UserR GET
+/user UserR GET POST
 
