@@ -32,3 +32,13 @@
 
   View your development site at http://localhost:3000/
 
+** Adding a new handler
+   We are building on top of the yesod [[http://www.yesodweb.com/book/scaffolding-and-the-site-template][scaffolding]]. To add a new
+   handler, quite many places have to be touched. use
+
+   #+BEGIN_SRC sh
+   stack exec -- yesod add-handler
+   #+END_SRC
+
+   to make it easier.
+   
