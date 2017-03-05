@@ -103,6 +103,7 @@ instance Yesod App where
     isAuthorized RobotsR _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized UserR _ = return Authorized
+    isAuthorized GuestFormR _ = return Authorized
 
     isAuthorized ProfileR _ = isAuthenticated
 
