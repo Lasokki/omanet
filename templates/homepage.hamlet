@@ -7,6 +7,6 @@
 <div .container-fluid .center-block .jutut>
   <div .container .laatikot>
     <div .col-md-5 .laatikko>
-      Tarvitsen majoitusta
+      <a href=@{UserR}>Tarvitsen majoitusta
     <div .col-md-5 .col-md-offset-2 .laatikko>
       Tarjoan majoitusta
