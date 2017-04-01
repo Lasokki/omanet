@@ -9,7 +9,7 @@ guestForm :: Form GuestFormData
 guestForm = renderDivs $ GuestFormData
     <$> areq textField "Nimi" Nothing
     <*> areq emailField "Sähköpostiosoite" Nothing
-    <*> areq boolField "Poltatko" Nothing
+    <*> areq boolField "Tupakoitko" Nothing
 
 getGuestFormR :: Handler Html
 getGuestFormR = do
