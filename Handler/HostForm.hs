@@ -3,12 +3,13 @@ module Handler.HostForm where
 import Import
 
 data HostFormData = HostFormData {hostName :: Text, hostEmail :: Text, allowsSmoking :: Bool}
+    deriving (Show)
 
 hostForm :: Form HostFormData
 hostForm = renderDivs $ HostFormData
     <$> areq textField "Nimi" Nothing
     <*> areq emailField "Sähköpostiosoite" Nothing
-    <*> areq boolField "Saako taloudessasi polttaa" Nothing
+    <*> areq boolField "Saako taloudessasi tupakoida" Nothing
 
 getHostFormR :: Handler Html
 getHostFormR = do

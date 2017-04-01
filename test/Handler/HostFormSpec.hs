@@ -4,8 +4,8 @@ import TestImport
 
 spec :: Spec
 spec = withApp $ do
-    describe "get guest form page" $ do
-        it "loads the guest form page and checks that it contains a form" $ do
+    describe "get host form page" $ do
+        it "loads the host form page and checks that it contains a form" $ do
             get HostFormR
             statusIs 200
             htmlAnyContain "form" "Lähetä"
