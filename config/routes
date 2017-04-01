@@ -11,3 +11,4 @@
 /user UserR GET POST
 
 /hae GuestFormR GET POST
+/tarjoa HostFormR GET POST

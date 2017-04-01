@@ -25,6 +25,7 @@ library
                      Handler.Profile
                      Handler.User
                      Handler.GuestForm
+                     Handler.HostForm
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -130,6 +131,7 @@ test-suite test
                        Handler.HomeSpec
                        Handler.ProfileSpec
                        Handler.GuestFormSpec
+                       Handler.HostFormSpec
                        TestImport
     hs-source-dirs:    test
     ghc-options:       -Wall
