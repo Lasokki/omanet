@@ -1,43 +1,73 @@
 * Opiskelijamajoitus.net
   description of the service here
-* Development
-** External dependencies
-   postgresql, postgresql development
+* Installation instructions for Ubuntu Server 16.10
+  Follow these steps to start developing. (Ignore the $ signs – they're there just to denote the beginning of a shell line.)
 
-** Configuring postgresql
-   Create new user =omanet_dev=
-
+** System upgrade
+   Make sure you're running on the latest packages
    #+BEGIN_SRC sh
-   createuser --interactive
-   createdb -O omanet_dev omanet_dev
-   createdb -O omanet_dev omanet_test
+   $ sudo apt-get update && sudo apt-get dist-upgrade -y
    #+END_SRC
 
-   with psql
-   #+BEGIN_SRC sql
-   alter user omanet_dev with password 'omanet';
+** External dependencies
+   #+BEGIN_SRC sh
+   $ sudo apt-get install -y postgresql postgresql-server-dev-9.5 haskell-stack pwgen
+   #+END_SRC
+
+** Download the webapp by cloning this repository
+   #+BEGIN_SRC sh
+   $ git clone https://github.com/Lasokki/omanet.git
+   $ cd omanet
+   #+END_SRC
+
+** Set up variables and generate a password
+   #+BEGIN_SRC sh
+   $ pwgen -s 64 1 > secret
+   $ chmod u=r,g-rwx,o-rwx secret
+   $ APP_PASSWORD=$(cat secret)
+   $ APP_USER=omanet_dev
+   $ sed -i "s/PASSWORD_PLACEHOLDER/$APP_PASSWORD/" config/settings.yml
+   #+END_SRC
+
+** Configuring postgresql
+   Create the user and two databases
+   #+BEGIN_SRC sh
+   $ sudo -u postgres createuser $APP_USER
+   $ sudo -u postgres psql -c "ALTER USER $APP_USER WITH PASSWORD '$APP_PASSWORD';"
+   $ sudo -u postgres createdb --owner=$APP_USER omanet_dev
+   $ sudo -u postgres createdb --owner=$APP_USER omanet_test
+   #+END_SRC
+
+** Stack stuff
+   Get GHC and build the dependencies
+   #+BEGIN_SRC sh
+   $ stack build yesod-bin cabal-install --install-ghc
+   #+END_SRC
+
+   Build the libraries
+   #+BEGIN_SRC sh
+   $ stack build
    #+END_SRC
 
 ** Run tests
    #+BEGIN_SRC sh
-   stack test
+   $ stack test
    #+END_SRC
 
 ** Starting the development server
-  #+BEGIN_SRC sh
-  stack build yesod-bin cabal-install --install-ghc # Install the yesod command line tool
-  stack build                                       # Build libraries
-  stack exec -- yesod devel                         # Launch devel server
-  #+END_SRC
-
-  View your development site at http://localhost:3000/
+   Launch the development server
+   #+BEGIN_SRC sh
+   $ stack exec -- yesod devel
+   #+END_SRC
+   The first run will do things. After it's done, press enter to rebuild.
+   Then view your development site at [[http://localhost:3000/]]
 
 ** Adding a new handler
    We are building on top of the yesod [[http://www.yesodweb.com/book/scaffolding-and-the-site-template][scaffolding]]. To add a new
    handler, quite many places have to be touched. use
 
    #+BEGIN_SRC sh
-   stack exec -- yesod add-handler
+   $ stack exec -- yesod add-handler
    #+END_SRC
 
    to make it easier.

@@ -104,6 +104,7 @@ instance Yesod App where
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized UserR _ = return Authorized
     isAuthorized GuestFormR _ = return Authorized
+    isAuthorized HostFormR _ = return Authorized
 
     isAuthorized ProfileR _ = isAuthenticated
 

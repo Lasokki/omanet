@@ -1,0 +1,3 @@
+<form method=post action=@{HostFormR} enctype=#{enctype}>
+  ^{widget}
+  <button>Lähetä
