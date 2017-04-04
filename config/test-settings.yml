@@ -7,5 +7,7 @@ database:
   #
   #   database: "_env:PGDATABASE:omanet_test"
   database: omanet_test
+  user: omanet_tester
+  password: "omanet_test"
 
 auth-dummy-login: true
