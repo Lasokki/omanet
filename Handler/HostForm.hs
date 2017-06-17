@@ -1,12 +1,13 @@
 module Handler.HostForm where
 
 import Import
+import Yesod.Form.Bootstrap3
 
 data HostFormData = HostFormData {hostName :: Text, hostEmail :: Text, allowsSmoking :: Bool}
     deriving (Show)
 
 hostForm :: Form HostFormData
-hostForm = renderDivs $ HostFormData
+hostForm = renderBootstrap3 BootstrapBasicForm $ HostFormData
     <$> areq textField "Nimi" Nothing
     <*> areq emailField "Sähköpostiosoite" Nothing
     <*> areq boolField "Saako taloudessasi tupakoida" Nothing
