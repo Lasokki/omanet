@@ -26,6 +26,7 @@ library
                      Handler.User
                      Handler.GuestForm
                      Handler.HostForm
+                     Handler.Pairings
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -94,7 +95,8 @@ library
                  , vector
                  , time
                  , case-insensitive
-                 , wai
+                , wai
+                , esqueleto
 
 executable         omanet
     if flag(library-only)
@@ -124,6 +126,39 @@ executable         omanet
                 RecordWildCards
                 CPP
 
+executable         makePairs
+    if flag(library-only)
+        Buildable: False
+
+    main-is:           Main.hs
+    hs-source-dirs:    makePairs
+    build-depends:     base
+                     , omanet
+                     , text
+                     , esqueleto
+                     , postgresql-simple
+
+    ghc-options:       -threaded -rtsopts -with-rtsopts=-N
+
+    extensions: TemplateHaskell
+                QuasiQuotes
+                OverloadedStrings
+                NoImplicitPrelude
+                MultiParamTypeClasses
+                TypeFamilies
+                GADTs
+                GeneralizedNewtypeDeriving
+                FlexibleContexts
+                FlexibleInstances
+                EmptyDataDecls
+                NoMonomorphismRestriction
+                DeriveDataTypeable
+                ViewPatterns
+                TupleSections
+                RecordWildCards
+                CPP
+
+                
 test-suite test
     type:              exitcode-stdio-1.0
     main-is:           Spec.hs
@@ -170,3 +205,4 @@ test-suite test
                  , classy-prelude
                  , classy-prelude-yesod
                  , aeson
+                 , esqueleto
