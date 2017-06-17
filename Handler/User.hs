@@ -1,9 +1,10 @@
 module Handler.User where
 
 import Import
+import Yesod.Form.Bootstrap3
 
 userForm :: Form User
-userForm = renderDivs $ User
+userForm = renderBootstrap3 BootstrapBasicForm $ User
     <$> areq textField "Nimi" Nothing
     <*> areq emailField "Sähköpostiosoite" Nothing
 

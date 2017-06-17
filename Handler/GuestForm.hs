@@ -1,12 +1,13 @@
 module Handler.GuestForm where
 
 import Import
+import Yesod.Form.Bootstrap3
 
 data GuestFormData = GuestFormData {guestName :: Text, guestEmail :: Text, doesGuestSmoke :: Bool}
     deriving (Show)
 
 guestForm :: Form GuestFormData
-guestForm = renderDivs $ GuestFormData
+guestForm = renderBootstrap3 BootstrapBasicForm $ GuestFormData
     <$> areq textField "Nimi" Nothing
     <*> areq emailField "Sähköpostiosoite" Nothing
     <*> areq boolField "Tupakoitko" Nothing
