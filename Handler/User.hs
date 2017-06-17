@@ -1,7 +1,6 @@
 module Handler.User where
 
 import Import
-import Yesod.Form.Bootstrap3
 
 userForm :: Form User
 userForm = renderBootstrap3 BootstrapBasicForm $ User

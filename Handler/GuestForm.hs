@@ -1,7 +1,6 @@
 module Handler.GuestForm where
 
 import Import
-import Yesod.Form.Bootstrap3
 
 data GuestFormData = GuestFormData {guestName :: Text, guestEmail :: Text, doesGuestSmoke :: Bool}
     deriving (Show)

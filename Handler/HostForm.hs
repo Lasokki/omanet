@@ -1,7 +1,6 @@
 module Handler.HostForm where
 
 import Import
-import Yesod.Form.Bootstrap3
 
 data HostFormData = HostFormData {hostName :: Text, hostEmail :: Text, allowsSmoking :: Bool}
     deriving (Show)
