@@ -19,7 +19,7 @@ getGuestFormR = do
 storeGuest :: GuestFormData -> Handler Html
 storeGuest formData = do
     userId <- runDB $ insert $ User (guestName formData) (guestEmail formData)
-    let guest = Guest userId (doesGuestSmoke formData)
+    let guest = Guesting userId (doesGuestSmoke formData)
     _ <- runDB $ insert $ guest
     defaultLayout [whamlet|<p>#{show guest}|]
         
