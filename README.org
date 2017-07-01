@@ -1,7 +1,7 @@
 * Opiskelijamajoitus.net
   description of the service here
-* Installation instructions for Ubuntu Server 16.10
-  Follow these steps to start developing. (Ignore the $ signs – they're there just to denote the beginning of a shell line.)
+* Installation instructions for Ubuntu Server 17.04
+  Follow these steps to start developing. (Ignore the $ signs – they're there just to denote the beginning of an unprivileged user's shell line.)
 
 ** System upgrade
    Make sure you're running on the latest packages
@@ -11,7 +11,7 @@
 
 ** External dependencies
    #+BEGIN_SRC sh
-   $ sudo apt-get install -y postgresql postgresql-server-dev-9.5 haskell-stack pwgen zlib1g-dev
+   $ sudo apt-get install -y postgresql postgresql-server-dev-9.6 haskell-stack git pwgen zlib1g-dev
    #+END_SRC
 
 ** Download the webapp by cloning this repository
