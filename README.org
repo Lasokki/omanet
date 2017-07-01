@@ -11,7 +11,7 @@
 
 ** External dependencies
    #+BEGIN_SRC sh
-   $ sudo apt-get install -y postgresql postgresql-server-dev-9.5 haskell-stack pwgen
+   $ sudo apt-get install -y postgresql postgresql-server-dev-9.5 haskell-stack pwgen zlib1g-dev
    #+END_SRC
 
 ** Download the webapp by cloning this repository
