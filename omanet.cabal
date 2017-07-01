@@ -26,7 +26,6 @@ library
                      Handler.User
                      Handler.GuestForm
                      Handler.HostForm
-                     Handler.Pairings
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
