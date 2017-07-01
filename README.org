@@ -22,11 +22,9 @@
 
 ** Set up variables and generate a password
    #+BEGIN_SRC sh
-   $ pwgen -s 64 1 > secret
-   $ chmod u=r,g-rwx,o-rwx secret
-   $ APP_PASSWORD=$(cat secret)
-   $ APP_USER=omanet_dev
-   $ sed -i "s/PASSWORD_PLACEHOLDER/$APP_PASSWORD/" config/settings.yml
+   $ ./initialise.py
+   $ APP_PASSWORD=$(egrep password config/secret.yml | head -1 | cut -d'"' -f 2 | cut -d":" -f 3)
+   $ APP_USER=$(egrep user config/secret.yml | head -1 | cut -d'"' -f 2 | cut -d":" -f 3)
    #+END_SRC
 
 ** Configuring postgresql
