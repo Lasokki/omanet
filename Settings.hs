@@ -1,4 +1,6 @@
 {-# Language CPP #-}
+{-# LANGUAGE DeriveGeneric #-}
+
 -- | Settings are centralized, as much as possible, into this file. This
 -- includes database connection settings, static file locations, etc.
 -- In addition, you can configure a number of different aspects of Yesod
@@ -19,6 +21,15 @@ import Yesod.Default.Config2       (applyEnvValue, configSettingsYml)
 import Yesod.Default.Util          (WidgetFileSettings, widgetFileNoReload,
                                     widgetFileReload)
 
+data EmailSettings = EmailSettings
+  { emailUsername :: String
+  , emailPassword :: String
+  , emailServer :: String
+  , emailPort :: Integer
+  } deriving (Generic)
+
+instance FromJSON EmailSettings
+
 -- | Runtime settings to configure this application. These settings can be
 -- loaded from various sources: defaults, environment variables, config files,
 -- theoretically even a database.
@@ -27,6 +38,8 @@ data AppSettings = AppSettings
     -- ^ Directory from which to serve static files.
     , appDatabaseConf           :: PostgresConf
     -- ^ Configuration settings for accessing the database.
+    , appEmailConf              :: EmailSettings
+    -- ^ Configuration settings for sending email
     , appRoot                   :: Maybe Text
     -- ^ Base for all generated URLs. If @Nothing@, determined
     -- from the request headers.
@@ -69,6 +82,7 @@ instance FromJSON AppSettings where
 #endif
         appStaticDir              <- o .: "static-dir"
         appDatabaseConf           <- o .: "database"
+        appEmailConf              <- o .: "mail"
         appRoot                   <- o .:? "approot"
         appHost                   <- fromString <$> o .: "host"
         appPort                   <- o .: "port"
