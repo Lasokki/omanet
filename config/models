@@ -7,6 +7,7 @@ User
 Host
     userId UserId
     allowSmoking Bool
+    guest UserId Maybe
     deriving Eq
     deriving Show
 Guest

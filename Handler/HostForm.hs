@@ -19,7 +19,7 @@ getHostFormR = do
 storeHost :: HostFormData -> Handler Html
 storeHost formData = do
     userId <- runDB $ insert $ User (hostName formData) (hostEmail formData)
-    let host = Host userId (allowsSmoking formData)
+    let host = Host userId (allowsSmoking formData) Nothing
     _ <- runDB $ insert $ host
     defaultLayout [whamlet|<p>#{show host}|]
 
