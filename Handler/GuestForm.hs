@@ -7,9 +7,10 @@ data GuestFormData = GuestFormData {guestName :: Text, guestEmail :: Text, doesG
 
 guestForm :: Form GuestFormData
 guestForm = renderBootstrap3 BootstrapBasicForm $ GuestFormData
-    <$> areq textField "Nimi" Nothing
-    <*> areq emailField "Sähköpostiosoite" Nothing
-    <*> areq boolField "Tupakoitko" Nothing
+    <$> areq textField (bfs ("Nimi" :: Text)) Nothing
+    <*> areq emailField (bfs ("Sähköpostiosoite" :: Text)) Nothing
+    <*> areq boolField smokingSettings Nothing
+    where smokingSettings = (bfs ("Tupakoitko" :: Text, "LOLLERSKATES" :: Text))
 
 getGuestFormR :: Handler Html
 getGuestFormR = do
