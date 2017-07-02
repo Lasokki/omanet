@@ -20,3 +20,4 @@ Pairings
     guesting GuestingId
     UniqueHost hosting
     UniqueGuest guesting
+    deriving Show

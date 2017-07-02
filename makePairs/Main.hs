@@ -3,7 +3,7 @@
 module Main where
 
 import Prelude     (IO)
-import Import hiding (on, (==.))
+import Import hiding (on, (==.), isNothing)
 import Application (db)
 
 import Database.Esqueleto
@@ -17,26 +17,18 @@ testPair g h = and subCriteria
 getEntityUserName :: Entity User -> Text
 getEntityUserName (Entity _ u) = userName u
 
-availableHostingsQuery :: IO [(Entity User, Entity Hosting)]
-availableHostingsQuery =
+availableHostings :: IO [(Entity User, Entity Hosting)]
+availableHostings =
     db $
     select $
-    from $ \(user `InnerJoin` hosting) -> do
-    on $ user ^. UserId ==. hosting ^. HostingUserId
---    where_ (hosting ^. HostingGuesting ==. val Nothing)
-    return  (user, hosting)
-
--- needyGuestsQuery =
---     db $
---     select $
---     from $ \(user `InnerJoin` guesting) -> do
---     on $ user ^. UserId ==. host ^. HostUserId
---     where_ (host ^. HostGuest ==. val Nothing)
---     return  (user, host)
+    from $ \(user `InnerJoin` hosting `LeftOuterJoin` pairing) -> do
+    on (just (hosting ^. HostingId) ==. pairing ?. PairingsHosting)
+    on (user ^. UserId ==. hosting ^. HostingUserId)
+    where_ (isNothing $ pairing ?. PairingsHosting)
+    return (user, hosting)
 
 main :: IO ()
 main = do
-    hostings <- availableHostingsQuery
-    let names = map (getEntityUserName . fst) hostings
-    mapM_ putStrLn names
-    
+    hosts <- availableHostings
+    let names = map (getEntityUserName . fst) hosts
+    mapM_ print names
