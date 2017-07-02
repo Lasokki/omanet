@@ -32,5 +32,11 @@ database:
   database: "_env:PGDATABASE:omanet_dev"
   poolsize: "_env:PGPOOLSIZE:10"
 
+mail:
+  emailServer: ""
+  emailPort: 587
+  emailUsername: ""
+  emailPassword: ""
+
 copyright: Insert copyright statement here
 #analytics: UA-YOURCODE

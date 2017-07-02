@@ -26,6 +26,7 @@ library
                      Handler.User
                      Handler.GuestForm
                      Handler.HostForm
+                     Mailer
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -96,6 +97,8 @@ library
                  , case-insensitive
                 , wai
                 , esqueleto
+                , HaskellNet
+                , HaskellNet-SSL
 
 executable         omanet
     if flag(library-only)

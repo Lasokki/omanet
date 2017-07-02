@@ -31,7 +31,7 @@ runDBWithApp app query = runSqlPersistMPool query (appConnPool app)
 withApp :: SpecWith (TestApp App) -> Spec
 withApp = before $ do
     settings <- loadYamlSettings
-        ["config/test-settings.yml", "config/settings.yml"]
+        ["config/test-settings.yml", "config/secret.yml", "config/settings.yml"]
         []
         useEnv
     foundation <- makeFoundation settings

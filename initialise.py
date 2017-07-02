@@ -25,10 +25,10 @@ database:
   password: "_env:PGPASS:{db_password}"
 
 mail:
-  host: "{mail_host}"
-  port: {mail_port}
-  user: "{mail_user}"
-  password: "{mail_password}"
+  emailServer: "{mail_host}"
+  emailPort: {mail_port}
+  emailUsername: "{mail_user}"
+  emailPassword: "{mail_password}"
 """
 DEFAULT_DB_USER = "omanet_dev"
 DEFAULT_MAIL_PORT = 587 # ssl
