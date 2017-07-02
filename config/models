@@ -4,14 +4,20 @@ User
     UniqueEmail email
     deriving Eq
     deriving Show
-Host
+Hosting
     userId UserId
     allowSmoking Bool
     deriving Eq
     deriving Show
-Guest
+Guesting
     userId UserId
     smokes Bool
+    UniqueUserId userId
     deriving Eq
     deriving Show
-    
+Pairings
+    hosting HostingId
+    guesting GuestingId
+    UniqueHost hosting
+    UniqueGuest guesting
+    deriving Show

@@ -3,23 +3,32 @@
 module Main where
 
 import Prelude     (IO)
-import Import hiding (on, (==.))
+import Import hiding (on, (==.), isNothing)
 import Application (db)
 
 import Database.Esqueleto
 
-testPair :: Guest -> Host -> Bool
-testPair g h = not (not (hostAllowSmoking h) && (guestSmokes g))
+-- Test wether user and host are compatible
+testPair :: Guesting -> Hosting -> Bool
+testPair g h = and subCriteria
+    where smokingOk = not (not (hostingAllowSmoking h) && (guestingSmokes g))
+          subCriteria = [smokingOk]
 
 getEntityUserName :: Entity User -> Text
 getEntityUserName (Entity _ u) = userName u
 
+availableHostings :: IO [(Entity User, Entity Hosting)]
+availableHostings =
+    db $
+    select $
+    from $ \(user `InnerJoin` hosting `LeftOuterJoin` pairing) -> do
+    on (just (hosting ^. HostingId) ==. pairing ?. PairingsHosting)
+    on (user ^. UserId ==. hosting ^. HostingUserId)
+    where_ (isNothing $ pairing ?. PairingsHosting)
+    return (user, hosting)
+
 main :: IO ()
 main = do
-    hosts <- db $ select $ from $ \(user `InnerJoin` host) ->
-        do on $ user ^. UserId ==. host ^. HostUserId
-           return  (user, host)
-    
+    hosts <- availableHostings
     let names = map (getEntityUserName . fst) hosts
-    mapM_ putStrLn names
-    
+    mapM_ print names
